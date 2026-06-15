@@ -33,12 +33,14 @@ while (true)
                 if (name == null)
                 {
                     ErrorMassage();
+                    Console.ReadKey();
                     continue;
                 }
                 Console.Write("Phone Number : ");
                 if (!long.TryParse(Console.ReadLine(), out long phonenumber))
                 {
                     ErrorMassage();
+                    Console.ReadKey();
                     continue;
                 }
                 Contact contact = new Contact() { Name = name, PhoneNumber = phonenumber };
@@ -54,11 +56,12 @@ while (true)
             {
                 Console.WriteLine("Edit Contact");
                 Console.WriteLine("----------------");
-                Console.WriteLine("Name : ");
+                Console.Write("Name : ");
                 string? name = Console.ReadLine();
                 if (name == null)
                 {
                     ErrorMassage();
+                    Console.ReadKey();
                     continue;
                 }
                 var result = cr.Find(name);
@@ -67,6 +70,7 @@ while (true)
                 else
                 {
                     ErrorMassage();
+                    Console.ReadKey();
                     continue;
                 }
                 Console.WriteLine("---------------------");
@@ -75,16 +79,20 @@ while (true)
                 if (newname == null)
                 {
                     ErrorMassage();
+                    Console.ReadKey();
+
                     continue;
                 }
-                Console.WriteLine("New Phonenumber : ");
+                Console.Write("New Phonenumber : ");
                 if (!long.TryParse(Console.ReadLine(), out long phonenumber))
                 {
                     ErrorMassage();
+                    Console.ReadKey();
+
                     continue;
                 }
                 cr.Edit(name, newname, phonenumber);
-                Console.WriteLine("");
+                Console.WriteLine("Contact Edited.");
                 Console.ReadKey();
             }
             break;
@@ -92,10 +100,13 @@ while (true)
             {
                 Console.WriteLine("Find Contact");
                 Console.WriteLine("------------------");
+                Console.Write("Name Find : ");
                 string? name = Console.ReadLine();
                 if (name == null)
                 {
                     ErrorMassage();
+                    Console.ReadKey();
+
                     continue;
                 }
                 var result = cr.Find(name);
@@ -104,6 +115,8 @@ while (true)
                 else
                 {
                     ErrorMassage();
+                    Console.ReadKey();
+
                     continue;
                 }
                 Console.ReadKey();
@@ -113,28 +126,36 @@ while (true)
             {
                 Console.WriteLine("Remove Cantact");
                 Console.WriteLine("---------------------");
+                Console.Write("Input Name : ");
                 string? name = Console.ReadLine();
+                Console.Write("Input PhoneNumber : ");
                 if (!long.TryParse(Console.ReadLine(), out long phonenumber))
                 {
                     ErrorMassage();
+                    Console.ReadKey();
+
                     continue;
                 }
-                if (name == null && cr.Remove(name, phonenumber))
+                if (name != null && cr.Remove(name, phonenumber))
                 {
                     Console.WriteLine("Are you sure remove cantact? (1.Yes | 2.No)");
                     var result = Console.ReadLine();
                     if (result != null && result == "1")
                     {
                         cr.Remove(name, phonenumber);
-                        Console.WriteLine("");
+                        Console.WriteLine("Contact Removed.");
+                        Console.ReadKey();
                     }
                     else
                     {
                         ErrorMassage();
+                        Console.ReadKey();
+
                         continue;
                     }
+                    
                 }
-                Console.ReadKey();
+               
             }
             break;
         case "5":
@@ -143,6 +164,7 @@ while (true)
                 Console.WriteLine("List Contact");
                 Console.WriteLine("----------------------");
                 List<Contact> result = cr.List();
+
                 if (result.Count != 0)
                 {
                     foreach (var r in result)
@@ -157,13 +179,17 @@ while (true)
                     if (number != null && number == "1")
                     {
                         Console.Write("Input Contact Index : ");
-                        int Index = int.Parse(Console.ReadLine());
-                        if (Index == null && Index > cr.Count())
+                        if (!int.TryParse(Console.ReadLine(), out int index))
                         {
                             ErrorMassage();
+                            Console.ReadKey();
                             continue;
                         }
-                        cr.RemoveByIndex(Index);
+                        cr.RemoveByIndex(index);
+                        Console.WriteLine("Contact Removed.");
+                        Console.WriteLine("Press any kry to continue...");
+                        Console.ReadKey();
+
 
                     }
                 }
@@ -171,17 +197,22 @@ while (true)
             break;
         case "6":
             {
-                Console.WriteLine("Are you sure you want to delete the list? (1.Yes | 2.No)");
+                Console.WriteLine("Are you sure you want to Clear the list? (1.Yes | 2.No)");
                 string? number = Console.ReadLine();
                 if (number != null && number == "1")
                 {
                     cr.ClearList();
                     Console.WriteLine("The list was cleared");
+                    Console.WriteLine("Press any key  to continue...");
                     Console.ReadKey();
                 }
-                Console.WriteLine("Press any key to continue...");
-                Console.ReadKey();
-                continue;
+                else if (number == "2")
+                {
+                    Console.WriteLine("Press any key to continue...");
+                    Console.ReadKey();
+                    continue;
+                }
+                break;
             }
         case "7":
             return;

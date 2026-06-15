@@ -36,20 +36,26 @@ namespace Contact_Manager_Console
             return contacts.Count;
         }
 
-        public bool Edit(string name,string newname, long phonenumber)
+        public bool Edit(string name, string newname, long phonenumber)
         {
-            var contact = contacts.FirstOrDefault(c => c.Name == name);
-            if (contact == null) return false;
+            var contact = contacts.FirstOrDefault(c =>
+                c.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+
+            if (contact == null)
+                return false;
 
             contact.Name = newname;
             contact.PhoneNumber = phonenumber;
+
             Save();
             return true;
         }
 
+
         public Contact? Find(string name)
         {
-            return contacts.FirstOrDefault(c => c.Name == name);
+            return contacts.FirstOrDefault(c =>
+                c.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
         }
 
 
@@ -73,7 +79,8 @@ namespace Contact_Manager_Console
         public bool Remove(string name, long phoneNumber)
         {
             var contact = contacts.FirstOrDefault(c =>
-                c.Name == name && c.PhoneNumber == phoneNumber);
+                c.Name.Equals(name, StringComparison.OrdinalIgnoreCase) &&
+                c.PhoneNumber == phoneNumber);
 
             if (contact == null)
                 return false;
@@ -85,15 +92,15 @@ namespace Contact_Manager_Console
 
         public bool RemoveByIndex(int index)
         {
-            if (index < 0 || index >= contacts.Count)
+            if (index < 1 || index > contacts.Count)
                 return false;
 
-            contacts.RemoveAt(index);
+            contacts.RemoveAt(index - 1);
             Save();
             return true;
         }
 
-        
+
 
         public void Save()
         {

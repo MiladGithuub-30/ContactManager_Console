@@ -12,3 +12,4 @@ H:\C# Project for GitHub\Contact Manager_Console\Contact Manager_Console\obj\Deb
 H:\C# Project for GitHub\Contact Manager_Console\Contact Manager_Console\obj\Debug\net8.0\Contact Manager_Console.pdb
 H:\C# Project for GitHub\Contact Manager_Console\Contact Manager_Console\obj\Debug\net8.0\Contact Manager_Console.genruntimeconfig.cache
 H:\C# Project for GitHub\Contact Manager_Console\Contact Manager_Console\obj\Debug\net8.0\ref\Contact Manager_Console.dll
+H:\C# Project for GitHub\Contact Manager_Console\Contact Manager_Console\obj\Debug\net8.0\Contact Manager_Console.sourcelink.json
